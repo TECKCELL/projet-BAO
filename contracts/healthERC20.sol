@@ -1,15 +1,15 @@
-pragma solidity 0.5.12;
+pragma solidity ^0.4.17;
 
 import "./ownable.sol";
 import "./ERC20.sol";
 import "./safeMath.sol";
-import "./SafeERC20.sol";
+//import "./SafeERC20.sol";
 import "./ReentrancyGuard.sol";
 
 
 contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     using safeMath for uint256;
-    using SafeERC20 for ERC20;
+    //using SafeERC20 for ERC20;
     
     struct pharmacie{
         string nom;
@@ -22,12 +22,13 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     mapping (address => pharmacie )PhamarcieProprietaire;
     mapping(uint256 => address)PhamarcieIdentifiant;
     mapping (uint256 => uint)FactureUtlisee;
-    pharmacie[] Pharmacies;
-    uint256[] ListeDesFactures;
+    pharmacie[]public Pharmacies;
+    uint256[] public ListeDesFactures;
 
     constructor (uint256 rate, ERC20 token) public {
         require(rate > 0, " rate is 0");
         require(address(token) != address(0), " token is the zero address");
+        
 
         _rate = rate;
         _token = token;
@@ -54,7 +55,7 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     function ListedePharmacies()external view returns (uint[]memory){
         uint[] memory results = new uint[](Pharmacies.length);
         uint counter;
-        for(uint i= 0;i <= Pharmacies.length;i++ ){
+        for(uint i= 0;i < Pharmacies.length;i++ ){
             results[counter]= i;
             counter++;
         }
@@ -111,14 +112,14 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
      
      */
     function _deliverTokens(address beneficiary, uint256 tokenAmount) internal {
-        _token.safeTransfer(beneficiary, tokenAmount);
+        _token.transfer(beneficiary, tokenAmount);
     }
 
     /**
     
      */
      function buyTokens(address from, address to, uint256 tokenAmount)internal nonReentrant onlyOwner{
-        _token.safeTransferFrom(from,to, tokenAmount);
+        _token.transferFrom(from,to, tokenAmount);
     }
     function _processPurchase(address beneficiary, uint256 tokenAmount) internal {
         _deliverTokens(beneficiary, tokenAmount);
@@ -129,4 +130,4 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     function _getTokenAmount(uint256 weiAmount) internal view returns (uint256) {
         return weiAmount.mul(_rate);
     } 
-}
+}s

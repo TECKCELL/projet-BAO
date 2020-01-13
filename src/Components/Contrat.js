@@ -57,13 +57,13 @@ class Contract {
     }
 
     async publicMethodes (methodeName, args) {
-        return await args === undefined ? this.contractPharmacie.methods[methodeName]().send({'from' : this.accounts2,'to':this.contract._address})
-                : this.contractPharmacie.methods[methodeName].apply(null, args).send({'from' : this.accounts2,'to':this.contract._address}).then(receipt=> {console.log(receipt)});
+        return await args === undefined ? this.contractPharmacie.methods[methodeName]().send({'from' : this.account})
+                : this.contract.methods[methodeName].apply(null, args).send({'from' : this.account}).then(receipt=> {console.log(receipt)});
     }
 
     async callMethodes (methodeName, args) {
         return await args === undefined ? this.contract.methods[methodeName]().call({'from' : this.account})
-                 : this.contractPharmacie.methods[methodeName].apply(null, [args]).call({'from' : this.account})
+                 : this.contract.methods[methodeName].apply(null, [args]).call({'from' : this.account})
     }
 
 }

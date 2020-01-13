@@ -1,4 +1,4 @@
-pragma solidity 0.5.12;
+pragma solidity ^0.4.17;
 
 /**
  * @title Ownable
@@ -7,7 +7,7 @@ pragma solidity 0.5.12;
  */
 contract Ownable {
   // state variables
-  address  payable admin;
+  address   admin;
   
 
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
@@ -24,7 +24,7 @@ contract Ownable {
     admin = msg.sender;
   }
   
-  function transferOwnership(address payable newOwner) public onlyOwner {
+  function transferOwnership(address  newOwner) public onlyOwner {
     require(newOwner != address(0));
     emit OwnershipTransferred(admin, newOwner);
     admin = newOwner;
