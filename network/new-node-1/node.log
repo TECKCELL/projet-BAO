@@ -1,0 +1,7 @@
+panic: MustNew: Failed to connect to Constellation (/home/teki/node-1/tm.ipc): lstat /home/teki/node-1/tm.ipc: no such file or directory
+
+goroutine 1 [running]:
+github.com/ethereum/go-ethereum/private/constellation.MustNew(0xc42003400f, 0x18, 0xc42003400f)
+	/home/teki/quorum/build/_workspace/src/github.com/ethereum/go-ethereum/private/constellation/constellation.go:108 +0x1dd
+github.com/ethereum/go-ethereum/private.FromEnvironmentOrNil(0x11a5f0c, 0xe, 0xc4201db820, 0xc4201db800)
+	/home/teki/quorum/build/_workspace/src/github.com/ethereum/go-ethereum/private/private.go:20 +0x64

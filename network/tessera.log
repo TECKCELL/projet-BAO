@@ -1,0 +1,2 @@
+Invalid value for option '--configfile': cannot convert 'config.json' to Config (java.io.FileNotFoundException: config.json not found.)
+Invalid value for option '--configfile': cannot convert 'config.json' to Config (java.io.FileNotFoundException: config.json not found.)
