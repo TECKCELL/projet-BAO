@@ -57,7 +57,7 @@ class Contract {
     }
 
     async publicMethodes (methodeName, args) {
-        return await args === undefined ? this.contractPharmacie.methods[methodeName]().send({'from' : this.account})
+        return await args === undefined ? this.contract.methods[methodeName]().send({'from' : this.account})
                 : this.contract.methods[methodeName].apply(null, args).send({'from' : this.account}).then(receipt=> {console.log(receipt)});
     }
 

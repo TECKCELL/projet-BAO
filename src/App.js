@@ -38,7 +38,8 @@ class App extends Component {
           routeComponents={[
 
             {'path': '/inscription','component': <Inscription contract={this.state.contract} />},
-            {'path': '/Grossiste','component': < Grossiste contract={this.state.contract} />}
+            {'path': '/Grossiste','component': <Grossiste contract={this.state.contract} />}
+            
 
           ]}
         />
