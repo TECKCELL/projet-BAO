@@ -22,7 +22,7 @@ contract ERC20 is IERC20 {
     function balanceOf(address account) public view returns (uint256){
         return _balances[account];
     }
-    function transfer(address recipient, uint256 amount) external returns (bool){
+    function transfer(address recipient, uint256 amount) public returns (bool){
         require(recipient != address(0), "ERC20: transfer to the zero address");
         _balances[msg.sender] = _balances[msg.sender].sub(amount, "ERC20: transfer amount exceeds balance");
         _balances[recipient] = _balances[recipient].add(amount);
@@ -40,7 +40,7 @@ contract ERC20 is IERC20 {
     function allowance(address owner, address spender) external view returns (uint256){
         return _allowances[owner][spender];
     }
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool){
+    function transferFrom(address sender, address recipient, uint256 amount) public returns (bool){
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 

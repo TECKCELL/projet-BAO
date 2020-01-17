@@ -32,9 +32,7 @@ class Grossiste extends Component{
  }
     componentDidMount(){
       
-         this.loadBlockchainData();
-         
-         
+         this.loadBlockchainData();    
     }
      
     async loadBlockchainData(){
@@ -64,7 +62,7 @@ class Grossiste extends Component{
       event.preventDefault();
       const idfacture = this.state.idfacture;
       const montant = this.state.montant;
-      const idPharma = this.state.keyPharma;
+      const idPharma = parseInt(this.state.keyPharma);
      // console.log(this.state)
      this.genererBao(idfacture,montant,idPharma);
      
@@ -110,15 +108,11 @@ class Grossiste extends Component{
 
     NumberList = function(props){
       const idfacture = props.idfacture
-      // Math.floor(Math.random()* (10 - 1) + 1) 
       const montant = props.montant
-      // (Math.floor(Math.random()) * (100 - 20) + 20)*(3/100)
       const idPharma = props.idPharma
-      //this.state.keyPharma
-    //  console.log(e.target.getAttribute("data-index")); //will log the index of the clicked item
      return(
 <div>
-<form id = 'bao' >
+<form>
    <label>{idfacture}</label>
       <br/>
       <label>{montant}</label>
@@ -146,6 +140,7 @@ class Grossiste extends Component{
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.bao = this.bao.bind(this)
         
     }
     
@@ -173,13 +168,13 @@ class Grossiste extends Component{
           <h2>Hello</h2>
           <button>close</button>
           <div>I am a modal</div>
-          <form>
+          <form onSubmit={this.bao}>
           
           <this.NumberList 
            idfacture =  {this.state.idfacture}
            montant = {this.state.montant}
            idPharma = {this.state.keyPharma}
-           form ='bao'    
+              
          />
           
           </form>
@@ -195,5 +190,5 @@ class Grossiste extends Component{
 export default Grossiste;
 const container = document.createElement("main");
 document.body.appendChild(container);
-ReactDOM.render(<Grossiste />, container)
+//ReactDOM.render(<Grossiste />, container)
 

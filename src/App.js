@@ -6,7 +6,7 @@ import Grossiste from './Components/Grossiste';
 import Contract from './Components/Contrat';
 import Router from './Components/Router';
 import Header from './Components/header';
-
+import MarketPlace from './Components/marketPlace';
 
 class App extends Component {
 
@@ -38,7 +38,9 @@ class App extends Component {
           routeComponents={[
 
             {'path': '/inscription','component': <Inscription contract={this.state.contract} />},
-            {'path': '/Grossiste','component': <Grossiste contract={this.state.contract} />}
+            {'path': '/Grossiste','component': <Grossiste contract={this.state.contract} />},
+            {'path': '/marketPlace','component': <MarketPlace contract={this.state.contract} />}
+            
             
 
           ]}

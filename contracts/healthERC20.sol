@@ -9,7 +9,7 @@ import "./ReentrancyGuard.sol";
 
 contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     using safeMath for uint256;
-    //using SafeERC20 for ERC20;
+    
     
     struct pharmacie{
         string nom;
@@ -20,7 +20,7 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     uint256 private _rate;
     mapping(address => uint256 )FacturePharmacie;
     mapping (address => pharmacie )PhamarcieProprietaire;
-    mapping(uint256 => address)PhamarcieIdentifiant;
+    mapping(uint => address)PhamarcieIdentifiant;
     mapping (uint256 => uint)FactureUtlisee;
     pharmacie[]public Pharmacies;
     uint256[] public ListeDesFactures;
@@ -39,12 +39,12 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
         p.nom = _nom;
         p.adresse = _addresse;
         require(keccak256(abi.encodePacked(PhamarcieProprietaire[msg.sender].adresse)) != keccak256(abi.encodePacked(p.adresse)),"vous etes déja inscrit");
-        uint id = Pharmacies.push(p);
+        uint id = Pharmacies.push(p) -1;
         PhamarcieIdentifiant[id] = msg.sender;
         PhamarcieProprietaire[msg.sender] = p ;
     }
     
-    function EnregistrementFacture(uint _identifiantFacture,uint _identifiantPharmacie,uint256 montant)public onlyOwner {
+    function EnregistrementFacture(uint _identifiantFacture,uint _identifiantPharmacie,uint256 montant)public onlyOwner   {
        address adressePharmacie = PhamarcieIdentifiant[_identifiantPharmacie];
        require(FacturePharmacie[adressePharmacie] != _identifiantFacture,"Cette facture à déja été enregistrée");
        uint identifiant = ListeDesFactures.push(_identifiantFacture);
@@ -112,14 +112,14 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
      
      */
     function _deliverTokens(address beneficiary, uint256 tokenAmount) internal {
-        _token.transfer(beneficiary, tokenAmount);
+        transfer(beneficiary, tokenAmount);
     }
 
     /**
     
      */
      function buyTokens(address from, address to, uint256 tokenAmount)internal nonReentrant onlyOwner{
-        _token.transferFrom(from,to, tokenAmount);
+        transferFrom(from,to, tokenAmount);
     }
     function _processPurchase(address beneficiary, uint256 tokenAmount) internal {
         _deliverTokens(beneficiary, tokenAmount);
@@ -130,4 +130,4 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
     function _getTokenAmount(uint256 weiAmount) internal view returns (uint256) {
         return weiAmount.mul(_rate);
     } 
-}s
+}

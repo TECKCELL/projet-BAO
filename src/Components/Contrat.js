@@ -65,6 +65,10 @@ class Contract {
         return await args === undefined ? this.contract.methods[methodeName]().call({'from' : this.account})
                  : this.contract.methods[methodeName].apply(null, [args]).call({'from' : this.account})
     }
+    async callMethodesMarketPlace (methodeName, args) {
+        return await args === undefined ? this.contractMarketPlace.methods[methodeName]().call({'from' : this.accounts3})
+                 : this.contractMarketPlace.methods[methodeName].apply(null, [args]).call({'from' : this.accounts3}).then(receipt=> {console.log(receipt)});
+    }
 
 }
 

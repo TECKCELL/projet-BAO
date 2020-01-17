@@ -32,6 +32,9 @@ class Router extends Component {
                   <li>
                   <a href="/Grossiste">Administrateur</a>
                   </li>
+                  <li>
+                  <a href="/marketPlace">MarketPlace</a>
+                  </li>
 
               </ul>
           </nav>
