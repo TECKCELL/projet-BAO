@@ -3,7 +3,7 @@
    "jdbc": {
        "username": "sa",
        "password": "",
-       "url": "jdbc:h2:/home/teki/node-2/db1;MODE=Oracle;TRACE_LEVEL_SYSTEM_OUT=0",
+       "url": "jdbc:h2:~/node-2/db1;MODE=Oracle;TRACE_LEVEL_SYSTEM_OUT=0",
        "autoCreateTables": true
    },
    "serverConfigs":[
@@ -19,7 +19,7 @@
        {
            "app":"Q2T",
            "enabled": true,
-            "serverAddress":"unix:/home/teki/node-2/tm.ipc",
+            "serverAddress":"unix:~/node-2/tm.ipc",
            "communicationType" : "REST"
        },
        {
@@ -45,11 +45,11 @@
 }
    ],
    "keys": {
-       "passwordFile":"/home/teki/node-1/password",
+       "passwordFile":"~/node-1/password",
        "keyData": [
            {
-               "privateKeyPath": "/home/teki/node-2/node-2.key",
-               "publicKeyPath": "/home/teki/node-2/node-2.pub"
+               "privateKeyPath": "~/node-2/node-2.key",
+               "publicKeyPath": "~/node-2/node-2.pub"
            }
        ]
    },

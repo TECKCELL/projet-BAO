@@ -43,6 +43,14 @@ constructor(props){
         this.setState({ montant :  montantRecupere }) 
         
         }
+      /*  var event = this.state.contract.contractMarketPlace.events.Transfer();
+
+        event.watch(function(error, result){
+            // result contains non-indexed arguments and topics
+            // given to the `Deposit` call.
+            if (!error)
+                console.log(result);
+        });
         
     this.state.contract.contractMarketPlace.events.Transfer({
    
@@ -52,7 +60,7 @@ constructor(props){
                                  let data = event.returnValues
   
                                    console.log(data.from, data.to);
-                                })
+                                })*/
     }                           
     render(){
         return(
