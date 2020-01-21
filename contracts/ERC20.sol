@@ -9,7 +9,7 @@ contract ERC20 is IERC20 {
     string public name = "ERC20 Token";
     string public symbol = "BAO";
     uint public decimals = 18;
-    uint private _totalSupply = 10000 * 10**decimals;//à modifier ou pas utiliser!
+    uint private _totalSupply = 0;//10000 * 10**decimals;//à modifier ou pas utiliser!
     mapping (address => uint) private _balances;
     mapping (address => mapping (address => uint256)) private _allowances;
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -57,5 +57,18 @@ contract ERC20 is IERC20 {
         _balances[account] = _balances[account].add(amount);
         emit Transfer(address(0), account, amount);
     }
+    
+    function burn(uint256 amount) external {
+    _burn(msg.sender, amount);
+    }
+  function _burn(address account, uint256 amount) internal {
+    require(amount != 0);
+    require(amount <= _balances[account]);
+    _totalSupply = _totalSupply.sub(amount);
+    _balances[account] = _balances[account].sub(amount);
+    emit Transfer(account, address(0), amount);
+    }
+
+ 
 
 }

@@ -41,6 +41,8 @@ constructor(props){
         const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();//this.contract1.methods.balanceOf(this.account).call();
         //const montant = await this.state.contract.callMethodesMarketPlace('balanceOf',[this.state.contract.accounts3])
         this.setState({ montant :  montantRecupere }) 
+        await this.state.contract.contractMarketPlace.methods.approve(this.state.contract.account,montantRecupere).send({from:this.state.contract.accounts3,gas: 470000,
+            gasPrice:0,}).then(receipt=> {console.log(receipt)});
         
         }
       /*  var event = this.state.contract.contractMarketPlace.events.Transfer();

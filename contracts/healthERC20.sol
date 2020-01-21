@@ -90,6 +90,7 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
      */
     function generateTokens(address beneficiary,uint256 _montant) internal nonReentrant onlyOwner {
         uint256 weiAmount = _montant;
+         _mint(msg.sender,weiAmount);
         _preValidatePurchase(beneficiary, weiAmount);
 
         // calculate token amount to be created

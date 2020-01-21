@@ -54,6 +54,10 @@ class Grossiste extends Component{
               
             })
           }
+
+          const balanceGrossiste = await this.state.contract.contract.methods.balanceOf(this.state.contract.account).call();
+          this.setState({ montantBAO :  balanceGrossiste })
+  
         }    
     }
     bao = event => {
@@ -84,6 +88,26 @@ class Grossiste extends Component{
       await this.contract1.methods.EnregistrementFacture(idfacture,idPharma,r).send({from:this.account,gas: 470000,
           gasPrice:0,}).then(receipt=> {console.log(receipt)});
   }
+    async retrouverBao(){
+
+      let account3 = this.state.contract.accounts3;
+      let account1 = this.state.contract.account;
+      const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
+      
+      await this.state.contract.contract.methods.transferFrom(account3,account1,montantRecupere).send({from:account1,gas: 470000,
+        gasPrice:0,}).then(receipt=> {console.log(receipt)});
+
+       
+
+    } 
+    async brulerBAO(){
+
+      let burnMontant = parseInt(this.state.montantBAO)
+
+      await this.state.contract.contract.methods.burn(burnMontant).send({from:this.state.contract.account,gas: 470000,
+        gasPrice:0,}).then(receipt=> {console.log(receipt)});
+     
+    }
 
       
     
@@ -113,11 +137,11 @@ class Grossiste extends Component{
      return(
 <div>
 <form>
-   <label>{idfacture}</label>
+   <label>Identifiant facture :{idfacture}</label>
       <br/>
-      <label>{montant}</label>
+      <label>montant facture :{montant}</label>
       <br/>
-      <label>{idPharma}</label>
+      <label>Identifiant pharmacie :{idPharma}</label>
       <br/>
       <button type="submit" >Générer BAO</button>
   </form>
@@ -135,12 +159,15 @@ class Grossiste extends Component{
         keyPharma :'',
         state :{ show: false },
         idfacture :'',
-        montant:''
+        montant:'',
+        montantBAO:0
         
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.bao = this.bao.bind(this)
+    this.retrouverBao = this.retrouverBao.bind(this)
+    this.brulerBAO = this.brulerBAO.bind(this)
         
     }
     
@@ -162,12 +189,11 @@ class Grossiste extends Component{
           handleClose={this.hideModal}
           style={customStyles}
           onRequestClose={this.hideModal}
-          contentLabel="Example Modal"
+          contentLabel=" Modal"
         >
 
-          <h2>Hello</h2>
-          <button>close</button>
-          <div>I am a modal</div>
+          <h2>Génération BAO</h2>
+          
           <form onSubmit={this.bao}>
           
           <this.NumberList 
@@ -180,7 +206,10 @@ class Grossiste extends Component{
           </form>
         </Modal>
 
-
+        {<button onClick={ this.retrouverBao }> <span>RetrouverBao</span></button>}
+        <br/>
+        <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
+        {<button onClick={ this.brulerBAO }> <span>Burn!!</span></button>}
 
       </div>
       
