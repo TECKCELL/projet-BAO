@@ -15,14 +15,23 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
         string nom;
         string adresse;
     }
+    
+    struct codeReduction{
+        
+        uint256 montant;
+        uint256 code;
+        uint util;
+    }
 
     ERC20 private _token;
     uint256 private _rate;
     mapping(address => uint256 )FacturePharmacie;
     mapping (address => pharmacie )PhamarcieProprietaire;
     mapping(uint => address)PhamarcieIdentifiant;
+    mapping (address => uint256) IdentifiantcodeReduction;
     mapping (uint256 => uint)FactureUtlisee;
     pharmacie[]public Pharmacies;
+    codeReduction[]public codes;
     uint256[] public ListeDesFactures;
 
     constructor (uint256 rate, ERC20 token) public {
@@ -51,6 +60,7 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
        FacturePharmacie[adressePharmacie] = identifiant;
        generateTokens(adressePharmacie,montant);
        
+       
     }
     function ListedePharmacies()external view returns (uint[]memory){
         uint[] memory results = new uint[](Pharmacies.length);
@@ -61,6 +71,28 @@ contract healthERC20 is  Ownable,ReentrancyGuard,ERC20 {
         }
         return results;
     }
+    function GenerationCodeReduction(address beneficary,uint256 amount)external{
+        
+        uint8 random = uint8(uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty)))%251);
+        codeReduction memory codeR;
+        codeR.montant = amount;
+        codeR.util = 0;
+        codeR.code = random;
+        uint id = codes.push(codeR) -1;
+        IdentifiantcodeReduction[beneficary] = id;
+        
+    }
+    function ListedeCodes()external view returns (uint[]memory){
+        uint[] memory results = new uint[](codes.length);
+        uint counter;
+        for(uint i= 0;i < codes.length;i++ ){
+            results[counter]= i;
+            counter++;
+        }
+        return results;
+    }
+    
+  
    
 
     /*function () external payable {

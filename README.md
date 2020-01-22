@@ -5,10 +5,10 @@ DEPLOIEMENT QUORUM
 
 1.téléchargement quorum
 
-$ git clone https://github.com/jpmorganchase/quorum.git
-$ cd quorum
-$ make all
-$ export PATH=$(pwd)/build/bin:$PATH
+-$ git clone https://github.com/jpmorganchase/quorum.git
+-$ cd quorum
+-$ make all
+-$ export PATH=$(pwd)/build/bin:$PATH
 
 2. démarer les noeuds tessera
 Dans le répertoire du projet:

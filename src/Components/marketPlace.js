@@ -12,10 +12,11 @@ constructor(props){
 
             contract : '',
             montant:0,
-            event:''
+            event:'',
+            
         
     };
-    
+    this.genererCodedeReduction = this.genererCodedeReduction.bind(this);
         
     }
 
@@ -32,17 +33,16 @@ constructor(props){
         const {contract}  = this.props;*/
         if(!this.state.contract){
             this.setState({ contract :  contract }) 
-            //this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22002"));
-        //quorumjs.extend(this.raft1Node)
-        /*const accounts = await this.raft1Node.eth.getAccounts()
-        this.account =accounts[0];
-        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)*/
+           
         
-        const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();//this.contract1.methods.balanceOf(this.account).call();
-        //const montant = await this.state.contract.callMethodesMarketPlace('balanceOf',[this.state.contract.accounts3])
+        const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
         this.setState({ montant :  montantRecupere }) 
         await this.state.contract.contractMarketPlace.methods.approve(this.state.contract.account,montantRecupere).send({from:this.state.contract.accounts3,gas: 470000,
             gasPrice:0,}).then(receipt=> {console.log(receipt)});
+
+
+
+            
         
         }
       /*  var event = this.state.contract.contractMarketPlace.events.Transfer();
@@ -63,12 +63,20 @@ constructor(props){
   
                                    console.log(data.from, data.to);
                                 })*/
-    }                           
+    }
+    async genererCodedeReduction(){
+        await this.state.contract.contractMarketPlace.methods.GenerationCodeReduction(this.state.contract.accounts2,this.state.montant).send({from:this.state.contract.accounts3,gas: 470000,
+            gasPrice:0,}).then(receipt=> {console.log(receipt)});
+
+    }   
+    
+    
     render(){
         return(
           
             <div className="subscribe-box">
                 <div>{<label>vous avez recu: {this.state.montant} Bao</label>}</div>
+                {<button onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
                 <div id="txStatus"></div>
             </div>
                 );}

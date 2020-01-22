@@ -12,9 +12,13 @@ class Inscription extends Component{
     constructor(props) {
         super(props);
         this.state = {contract : '',
-        balanceDao :0};
+        balanceDao :0,
+        codeCount :0,
+        codes : []   
+    };
         this.raft1Node = '';
         this.contract1 = '';
+       
         this.EnvoyerBao = this.EnvoyerBao.bind(this)
        
     }
@@ -49,6 +53,17 @@ class Inscription extends Component{
 
             this.setState({ balanceDao :  montantRecupere })
 
+
+        const codeCount = await this.state.contract.callMethodes('ListedeCodes')
+        this.setState({ codeCount })
+        for (var i = 0; i <= codeCount.length -1; i++) {
+
+            const codes = await this.state.contract.callMethodes('codes',[i])
+            this.setState({
+                codes: [...this.state.codes, codes]
+              
+            })
+          }
 
     }
     async Inscription(username,addresse){
@@ -100,6 +115,14 @@ class Inscription extends Component{
        <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}
        
        {<button onClick={ this.EnvoyerBao }> <span>EnvoyerBao</span></button>}
+
+       <ul>
+     { this.state.codes.map((code,index) =>(
+    <label>
+      <li key={index} data-index={index}>Code de réduction:{code.code},Montant:{code.montant}</li>
+      </label>       
+                )
+    )}</ul>
        
        </div>
         </div>

@@ -1,4 +1,4 @@
-export const HEALTH_ERC20_ADDRESS = '0x858Ce0345862974B5a59e341aD0e9C72f8c3eD41'
+export const HEALTH_ERC20_ADDRESS = '0xadFAA21B74044a265fa2eC4eF192C9cD1b5BE700'
 export const HEALTH_ERC20_ABI =[
 	{
 		"constant": true,
@@ -176,6 +176,24 @@ export const HEALTH_ERC20_ABI =[
 		"constant": false,
 		"inputs": [
 			{
+				"name": "beneficary",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "GenerationCodeReduction",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "_identifiantFacture",
 				"type": "uint256"
 			},
@@ -233,6 +251,20 @@ export const HEALTH_ERC20_ABI =[
 	},
 	{
 		"constant": true,
+		"inputs": [],
+		"name": "ListedeCodes",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [
 			{
 				"name": "owner",
@@ -247,6 +279,33 @@ export const HEALTH_ERC20_ABI =[
 		"outputs": [
 			{
 				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "codes",
+		"outputs": [
+			{
+				"name": "montant",
+				"type": "uint256"
+			},
+			{
+				"name": "code",
+				"type": "uint256"
+			},
+			{
+				"name": "util",
 				"type": "uint256"
 			}
 		],
