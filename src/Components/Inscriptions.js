@@ -14,17 +14,17 @@ class Inscription extends Component{
         this.state = {contract : '',
         balanceDao :0,
         codeCount :0,
-        codes : []   
+        codes : []
     };
         this.raft1Node = '';
         this.contract1 = '';
-       
+
         this.EnvoyerBao = this.EnvoyerBao.bind(this)
-       
+
     }
 
    /* async componentDidUpdate(){
-       
+
 
         }*/
     async componentDidMount() {
@@ -32,14 +32,14 @@ class Inscription extends Component{
         await contract3.init();
         const {contract}  = this.props;
         if(!this.state.contract3){
-            this.setState({ 
-                contract :  contract3 
-                
-            
+            this.setState({
+                contract :  contract3
+
+
             })
              await this.LoadBlockChainData();
         }
-       
+
     }
     async LoadBlockChainData(){
 
@@ -61,7 +61,7 @@ class Inscription extends Component{
             const codes = await this.state.contract.callMethodes('codes',[i])
             this.setState({
                 codes: [...this.state.codes, codes]
-              
+
             })
           }
 
@@ -89,41 +89,49 @@ class Inscription extends Component{
             gasPrice:0,}).then(receipt=> {console.log(receipt)});
 
     }
-    
+
     form = () => {
        return (
         <div className="subscribe-box">
             <h2>Inscription à MédiConnect</h2>
-            <form onSubmit={ this.save} className="subscribe">
-            <input id="nom" ref={(input) => { this.nom = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
+            <form onSubmit={ this.save} className="form-group">
+              <div class="form-group">
+                <div class="col-xs-4">
+                  <label for="usr">Veuillez entrer un nom d'utilisateur</label>
+                  <input id="usr" class="form-control" ref={(input) => { this.nom = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
+                </div>
+              </div>
             <br/>
             <br/>
 
-            <input id ="addresse" 
+            <label for="usr">Veuillez entrer une adresse</label>
+            <input id ="addresse"
             ref={(input) => { this.addresse = input }}
              type="text"
+             class="form-control"
+             id="usr"
               placeholder="Veuillez entrer addresse"
               minLength="3"
-              autoComplete="off" 
+              autoComplete="off"
               required="required"/>
               <br/>
               <br/>
 
-            <button type="submit"> <span>S'inscrire</span></button>
+            <button type="submit" class="btn btn-secondary" >S'inscrire</button>
             </form>
             <br/>
        <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}
-       
-       {<button onClick={ this.EnvoyerBao }> <span>EnvoyerBao</span></button>}
+
+       {<button class="btn btn-secondary" onClick={ this.EnvoyerBao }>EnvoyerBao</button>}
 
        <ul>
      { this.state.codes.map((code,index) =>(
     <label>
       <li key={index} data-index={index}>Code de réduction:{code.code},Montant:{code.montant}</li>
-      </label>       
+      </label>
                 )
     )}</ul>
-       
+
        </div>
         </div>
        );
@@ -139,13 +147,12 @@ class Inscription extends Component{
         const addresse = this.addresse.value;
        // console.log(this.state)
        this.Inscription(username,addresse);
-       
+
         //this.state.contract.publicMethodes('EnregistrementpharmacieAddress',[username,addresse])
-       
+
     }
     render(){
         return this.form();
     }
 }
 export default Inscription;
-

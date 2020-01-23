@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Web3 from 'web3';
 import React, { Component } from 'react';
 import './App.css';
@@ -33,23 +34,22 @@ class App extends Component {
           </main>
         </div>
         </React.Fragment>
-        
+
         <Router
           routeComponents={[
 
             {'path': '/inscription','component': <Inscription contract={this.state.contract} />},
             {'path': '/Grossiste','component': <Grossiste contract={this.state.contract} />},
             {'path': '/marketPlace','component': <MarketPlace contract={this.state.contract} />}
-            
-            
+
+
 
           ]}
         />
         </div>
     );
         }
-    
+
 }
 
 export default App;
-
