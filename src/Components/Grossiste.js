@@ -206,10 +206,10 @@ class Grossiste extends Component{
           </form>
         </Modal>
 
-        {<button onClick={ this.retrouverBao }> <span>RetrouverBao</span></button>}
+        {<button class="btn btn-secondary" onClick={ this.retrouverBao }>RetrouverBao</button>}
         <br/>
         <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
-        {<button onClick={ this.brulerBAO }> <span>Burn!!</span></button>}
+        {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Burn!!</button>}
 
       </div>
 
