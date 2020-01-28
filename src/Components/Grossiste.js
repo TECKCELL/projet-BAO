@@ -85,7 +85,7 @@ class Grossiste extends Component{
       let value = montant/ethEuro
       let r = this.raft1Node.utils.toWei(value.toString() ,'ether');
 
-      await this.contract1.methods.EnregistrementFacture(idfacture,idPharma,r).send({from:this.account,gas: 470000,
+      await this.state.contract.contract.methods.EnregistrementFacture(idfacture,idPharma,montant).send({from:this.account,gas: 470000,
           gasPrice:0,}).then(receipt=> {console.log(receipt)});
   }
     async retrouverBao(){
@@ -125,7 +125,7 @@ class Grossiste extends Component{
       let objet = {
 
         idfacture : Math.floor(Math.random()* (10 - 1) + 1),
-        montant : (Math.floor(Math.random()) * (100 - 20) + 20)*(3/100)
+        montant : Math.floor(Math.floor(Math.random() * (10000 - 2000) + 20)*(3/100))
       }
      return objet
     }

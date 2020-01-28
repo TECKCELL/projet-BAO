@@ -15,6 +15,8 @@ class Contract {
         this.raft2Node = '';
         this.raft3Node = '';
         this.code = '';
+        this.accounts = [];
+        this.raft = []
 
     }
 
@@ -34,6 +36,15 @@ class Contract {
         const accounts3 = await this.raft3Node.eth.getAccounts();
         this.accounts3 = accounts3[0];
        // unlockAccount(raft3Node); 
+         this.accounts.push(this.account)
+         this.accounts.push(this.accounts2)
+         this.accounts.push(this.accounts3)
+         this.raft.push(this.raft1Node)
+         this.raft.push(this.raft2Node)
+         this.raft.push(this.raft3Node)
+         this.unlockAccountsIfNeeded(this.accounts,this.raft,'aaaa',300);
+
+
                          
         const networkId =  await this.raft1Node.eth.net.getId()
                
@@ -49,6 +60,29 @@ class Contract {
 
         }
 
+    }
+    async isAccountLocked(account,raft) {
+        try {
+            raft.eth.sendTransaction({
+                from: account,
+                to: account, 
+                value: 0
+            });
+            return false;
+        } catch (err) {
+            return (err.message == "authentication needed: password or unlock");
+        }
+    }
+    
+    async unlockAccountsIfNeeded(accounts,rafts, password, unlock_duration_sec) {
+        if (typeof(unlock_duration_sec)==='undefined') unlock_duration_sec = 300;
+    
+        for (let i = 0; i < accounts.length ; i++) {
+            if (this.isAccountLocked(accounts[i],rafts[i])) {
+                console.log("Account " + accounts[i] + " is locked. Unlocking")
+                rafts[i].eth.personal.unlockAccount(accounts[i], password, unlock_duration_sec);
+            }
+        }
     }
 
     async privateForMethodes (methodeName, val, args,key) {

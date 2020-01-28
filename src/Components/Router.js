@@ -26,7 +26,7 @@ class Router extends Component {
                       <a href="/">Home</a>
                   </li>
                   <li>
-                      <a href="/inscription">S'inscrire</a>
+                      <a href="/inscription">Pharmacie</a>
                       
                   </li>
                   <li>
