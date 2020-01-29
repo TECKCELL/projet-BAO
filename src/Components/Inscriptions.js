@@ -43,13 +43,14 @@ class Inscription extends Component{
     }
     async LoadBlockChainData(){
 
-        /*this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
+        this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
         quorumjs.extend(this.raft1Node)
         const accounts = await this.raft1Node.eth.getAccounts()
         this.account =accounts[0];
-        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)*/
+        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)
         
-        const montantRecupere = await this.state.contract.contractPharmacie.methods.balanceOf(this.account).call();
+        const montantRecupere = await this.contract1.methods.balanceOf(this.account).call();
+         //await this.state.contract.contractPharmacie.methods.balanceOf(this.account).call();
 
             this.setState({ balanceDao :  montantRecupere })
 
@@ -79,13 +80,13 @@ class Inscription extends Component{
     }
     async EnvoyerBao(){
 
-       /* this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
+        this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
         quorumjs.extend(this.raft1Node)
         const accounts = await this.raft1Node.eth.getAccounts()
         this.account =accounts[0];
-        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)*/
+        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)
         let montant = this.state.balanceDao;
-        await this.state.contract.contractPharmacie.transfer(this.state.contract.accounts3,montant).send({from:this.account,gas: 470000,
+        await this.contract1.methods.transfer(this.state.contract.accounts3,montant).send({from:this.account,gas: 470000,
             gasPrice:0,}).then(receipt=> {console.log(receipt)});
 
     }

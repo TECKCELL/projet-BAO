@@ -139,7 +139,7 @@ class Grossiste extends Component{
 <form>
    <label>Identifiant facture :{idfacture}</label>
       <br/>
-      <label>montant facture :{montant}</label>
+      <label>montant facture :{montant} <span>BAO</span></label>
       <br/>
       <label>Identifiant pharmacie :{idPharma}</label>
       <br/>
