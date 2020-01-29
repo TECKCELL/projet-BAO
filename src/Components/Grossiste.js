@@ -31,10 +31,10 @@ class Grossiste extends Component{
   Modal.setAppElement('main');
  }
     componentDidMount(){
-      
-         this.loadBlockchainData();    
+
+         this.loadBlockchainData();
     }
-     
+
     async loadBlockchainData(){
 
         let contract = new Contract();
@@ -42,8 +42,8 @@ class Grossiste extends Component{
         /*this.setState({ contract : contract});
         const {contract}  = this.props;*/
         if(!this.state.contract){
-            this.setState({ contract :  contract }) 
-            
+            this.setState({ contract :  contract })
+
         const pharmaCount = await this.state.contract.callMethodes('ListedePharmacies')
         this.setState({ pharmaCount })
         for (var i = 0; i <= pharmaCount.length -1; i++) {
@@ -51,14 +51,14 @@ class Grossiste extends Component{
             const pharma = await this.state.contract.callMethodes('Pharmacies',[i])
             this.setState({
               pharmas: [...this.state.pharmas, pharma]
-              
+
             })
           }
 
           const balanceGrossiste = await this.state.contract.contract.methods.balanceOf(this.state.contract.account).call();
           this.setState({ montantBAO :  balanceGrossiste })
-  
-        }    
+
+        }
     }
     bao = event => {
       if(event === undefined)
@@ -69,9 +69,9 @@ class Grossiste extends Component{
       const idPharma = parseInt(this.state.keyPharma);
      // console.log(this.state)
      this.genererBao(idfacture,montant,idPharma);
-     
+
       //this.state.contract.publicMethodes('EnregistrementpharmacieAddress',[username,addresse])
-     
+
   }
     async genererBao(idfacture,montant,idPharma){
 
@@ -93,34 +93,34 @@ class Grossiste extends Component{
       let account3 = this.state.contract.accounts3;
       let account1 = this.state.contract.account;
       const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
-      
+
       await this.state.contract.contract.methods.transferFrom(account3,account1,montantRecupere).send({from:account1,gas: 470000,
         gasPrice:0,}).then(receipt=> {console.log(receipt)});
 
-       
 
-    } 
+
+    }
     async brulerBAO(){
 
       let burnMontant = parseInt(this.state.montantBAO)
 
       await this.state.contract.contract.methods.burn(burnMontant).send({from:this.state.contract.account,gas: 470000,
         gasPrice:0,}).then(receipt=> {console.log(receipt)});
-     
+
     }
 
-      
-    
+
+
     showModal = (e) => {
       let objet = this.genererFactureMontant()
-      this.setState({ show: true ,keyPharma:e.target.getAttribute("data-index"),idfacture:objet.idfacture,montant:objet.montant}); 
+      this.setState({ show: true ,keyPharma:e.target.getAttribute("data-index"),idfacture:objet.idfacture,montant:objet.montant});
     };
-  
+
     hideModal = () => {
       this.setState({ show: false });
     };
 
-    
+
     genererFactureMontant = function () {
       let objet = {
 
@@ -146,11 +146,11 @@ class Grossiste extends Component{
       <button type="submit" >Générer BAO</button>
   </form>
       </div>
-     
-     )  
+
+     )
   }
   //this.genererBao(idfacture,montant,idPharma)
-   
+
     constructor(props){
         super(props);
         this.state = {contract : '',
@@ -161,27 +161,27 @@ class Grossiste extends Component{
         idfacture :'',
         montant:'',
         montantBAO:0
-        
+
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.bao = this.bao.bind(this)
     this.retrouverBao = this.retrouverBao.bind(this)
     this.brulerBAO = this.brulerBAO.bind(this)
-        
+
     }
-    
+
     render(){
         return(
-          
+
             <div className="subscribe-box">
-                    
+
       Liste des pharmacies
-      <ul>
+      <ul class="list-group">
      { this.state.pharmas.map((pharma,index) =>(
     <label>
-      <li key={index} data-index={index} onClick={ this.showModal } value={pharma.nom}>{pharma.nom},{pharma.adresse}</li>
-      </label>       
+      <li class="list-group-item list-group-item-info" key={index} data-index={index} onClick={ this.showModal } value={pharma.nom}>{pharma.nom},{pharma.adresse}</li>
+      </label>
                 )
     )}</ul>
     <Modal
@@ -193,31 +193,30 @@ class Grossiste extends Component{
         >
 
           <h2>Génération BAO</h2>
-          
+
           <form onSubmit={this.bao}>
-          
-          <this.NumberList 
+
+          <this.NumberList
            idfacture =  {this.state.idfacture}
            montant = {this.state.montant}
            idPharma = {this.state.keyPharma}
-              
+
          />
-          
+
           </form>
         </Modal>
 
-        {<button onClick={ this.retrouverBao }> <span>RetrouverBao</span></button>}
+        {<button class="btn btn-secondary" onClick={ this.retrouverBao }>RetrouverBao</button>}
         <br/>
         <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
-        {<button onClick={ this.brulerBAO }> <span>Burn!!</span></button>}
+        {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Burn!!</button>}
 
       </div>
-      
-        );}    
+
+        );}
 }
 
 export default Grossiste;
 const container = document.createElement("main");
 document.body.appendChild(container);
 //ReactDOM.render(<Grossiste />, container)
-
