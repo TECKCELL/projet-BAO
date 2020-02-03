@@ -30,7 +30,7 @@ class Router extends Component {
                   <a class="nav-link" href="/Router">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/inscription">S'inscrire</a>
+                  <a class="nav-link" href="/inscription">Pharmacies</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/Grossiste">Administrateur</a>

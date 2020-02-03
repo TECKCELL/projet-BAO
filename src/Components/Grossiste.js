@@ -174,7 +174,7 @@ class Grossiste extends Component{
     render(){
         return(
 
-            <div className="subscribe-box">
+            <div className="subscribe-box bg-primary">
 
       Liste des pharmacies
       <ul class="list-group">
@@ -212,6 +212,7 @@ class Grossiste extends Component{
         {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Burn!!</button>}
 
       </div>
+
 
         );}
 }

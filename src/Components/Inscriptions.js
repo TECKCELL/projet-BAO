@@ -92,7 +92,8 @@ class Inscription extends Component{
 
     form = () => {
        return (
-        <div className="subscribe-box">
+
+        <div class="bg-success mb-3">
             <h2>Inscription à MédiConnect</h2>
             <form onSubmit={ this.save} className="form-group">
               <div class="form-group">
@@ -134,7 +135,9 @@ class Inscription extends Component{
 
        </div>
         </div>
+
        );
+
     }
     changeUsername = event => {
         this.setState({username : event.target.value});
