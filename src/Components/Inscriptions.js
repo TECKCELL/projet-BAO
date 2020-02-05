@@ -69,14 +69,14 @@ class Inscription extends Component{
     }
     async Inscription(username,addresse){
 
-        /*this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
+        this.raft1Node = new Web3( new Web3.providers.HttpProvider("http://localhost:22001"));
         quorumjs.extend(this.raft1Node)
         const accounts = await this.raft1Node.eth.getAccounts()
         this.account =accounts[0];
-        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)*/
+        this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)
 
         await this.state.contract.contractPharmacie.methods.EnregistrementpharmacieAddress(username,addresse).send({from:this.account,gas: 470000,
-            gasPrice:0,}).then(receipt=> {console.log(receipt)});
+            gasPrice:0,}).then(receipt=> {alert(JSON.stringify(receipt,null,'\t'))});
     }
     async EnvoyerBao(){
 
@@ -86,8 +86,8 @@ class Inscription extends Component{
         this.account =accounts[0];
         this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)
         let montant = this.state.balanceDao;
-        await this.contract1.methods.transfer(this.state.contract.accounts3,montant).send({from:this.account,gas: 470000,
-            gasPrice:0,}).then(receipt=> {console.log(receipt)});
+        await this.state.contract.contractPharmacie.methods.transfer(this.state.contract.accounts3,montant).send({from:this.account,gas: 470000,
+            gasPrice:0}).then(receipt=> {alert(receipt)});
 
     }
 
@@ -99,7 +99,7 @@ class Inscription extends Component{
               <div class="form-group">
                 <div class="col-xs-4">
                   <label for="usr">Veuillez entrer un nom d'utilisateur</label>
-                  <input id="usr" class="form-control" ref={(input) => { this.nom = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
+                  <input id="usr" class="form-control" ref={(input) => { this.usr = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
                 </div>
               </div>
             <br/>
@@ -110,7 +110,6 @@ class Inscription extends Component{
             ref={(input) => { this.addresse = input }}
              type="text"
              class="form-control"
-             id="usr"
               placeholder="Veuillez entrer addresse"
               minLength="3"
               autoComplete="off"
@@ -122,6 +121,7 @@ class Inscription extends Component{
             </form>
             <br/>
        <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}
+       <span></span>
 
        {<button class="btn btn-secondary" onClick={ this.EnvoyerBao }>EnvoyerBao</button>}
 
@@ -132,7 +132,7 @@ class Inscription extends Component{
       </label>
                 )
     )}</ul>
-
+      <div></div>
        </div>
         </div>
        );
@@ -144,7 +144,7 @@ class Inscription extends Component{
         if(event === undefined)
             return 1;
         event.preventDefault();
-        const username = this.nom.value;
+        const username = this.usr.value;
         const addresse = this.addresse.value;
        // console.log(this.state)
        this.Inscription(username,addresse);

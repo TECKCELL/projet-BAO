@@ -86,7 +86,7 @@ class Grossiste extends Component{
       let r = this.raft1Node.utils.toWei(value.toString() ,'ether');
 
       await this.state.contract.contract.methods.EnregistrementFacture(idfacture,idPharma,montant).send({from:this.account,gas: 470000,
-          gasPrice:0,}).then(receipt=> {console.log(receipt)});
+          gasPrice:0}).then(receipt=> {console.log(receipt)});
   }
     async retrouverBao(){
 
@@ -206,10 +206,10 @@ class Grossiste extends Component{
           </form>
         </Modal>
 
-        {<button class="btn btn-secondary" onClick={ this.retrouverBao }>RetrouverBao</button>}
+        {<button class="btn btn-secondary" onClick={ this.retrouverBao }>Récupérer les Bao</button>}
         <br/>
         <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
-        {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Burn!!</button>}
+        {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Bruler!!</button>}
 
       </div>
 

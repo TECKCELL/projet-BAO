@@ -33,6 +33,7 @@ constructor(props){
         const {contract}  = this.props;*/
         if(!this.state.contract){
             this.setState({ contract :  contract }) 
+
            
         
         const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
