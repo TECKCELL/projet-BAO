@@ -121,7 +121,7 @@ class Inscription extends Component{
             <button type="submit" class="btn btn-secondary" >S'inscrire</button>
             </form>
             <br/>
-       <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}
+       <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}<hr></hr>
 
        {<button class="btn btn-secondary" onClick={ this.EnvoyerBao }>EnvoyerBao</button>}
 

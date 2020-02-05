@@ -20,23 +20,23 @@ class Router extends Component {
 
       <div>
         <BrowserRouter>
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
               <div class="navbar-header">
-                <a class="navbar-brand">BAO Market</a>
+                <a class="navbar-brand text-success">BAO Market</a>
               </div>
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/Router">Home</a>
+                  <a class="nav-link text-white" href="/Router">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/inscription">Pharmacies</a>
+                  <a class="nav-link text-white" href="/inscription">Pharmacies</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/Grossiste">Administrateur</a>
+                  <a class="nav-link text-white" href="/Grossiste">Administrateur</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/marketPlace">MarketPlace</a>
+                  <a class="nav-link text-white" href="/marketPlace">MarketPlace</a>
                 </li>
               </ul>
             </div>

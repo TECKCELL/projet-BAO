@@ -76,7 +76,7 @@ constructor(props){
 
             <div className="subscribe-box bg-danger">
                 <div>{<label>vous avez recu: {this.state.montant} Bao</label>}</div>
-                {<button onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
+                {<button class="btn btn-secondary" onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
                 <div id="txStatus"></div>
             </div>
                 );}

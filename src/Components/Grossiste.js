@@ -174,7 +174,7 @@ class Grossiste extends Component{
     render(){
         return(
 
-            <div className="subscribe-box bg-primary">
+            <div className="subscribe-box">
 
       Liste des pharmacies
       <ul class="list-group">
