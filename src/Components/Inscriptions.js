@@ -93,20 +93,25 @@ class Inscription extends Component{
 
     form = () => {
        return (
-        <div className="subscribe-box">
-            <h2>Inscription à MédiConnect</h2>
-            <form onSubmit={ this.save} className="form-group">
-              <div class="form-group">
-                <div class="col-xs-4">
-                  <label for="usr">Veuillez entrer un nom d'utilisateur</label>
-                  <input id="usr" class="form-control" ref={(input) => { this.usr = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
+<div className="site-section">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <h2 className="h3 mb-5 text-black">Inscription</h2>
+        </div>
+        <div className="col-md-12">
+  
+          <form onSubmit={ this.save}>
+  
+            <div className="p-3 p-lg-5 border">
+              <div className="form-group row">
+                <div className="col-md-6">
+                  <label for="usr" className="text-black">Veuillez entrer un nom d'utilisateur<span className="text-danger">*</span></label>
+                  <input id="usr" className="form-control" ref={(input) => { this.usr = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
                 </div>
-              </div>
-            <br/>
-            <br/>
-
-            <label for="usr">Veuillez entrer une adresse</label>
-            <input id ="addresse"
+                <div className="col-md-6">
+                  <label for="usr" className="text-black">Veuillez entrer une adresse <span className="text-danger">*</span></label>
+                  <input id ="addresse"
             ref={(input) => { this.addresse = input }}
              type="text"
              class="form-control"
@@ -114,28 +119,50 @@ class Inscription extends Component{
               minLength="3"
               autoComplete="off"
               required="required"/>
-              <br/>
-              <br/>
+                </div>
+                <div className="col-md-12" >
+                    <br></br>
+                </div>
+              <div className="form-group row">
+                <div className="col-lg-12">
+                  <input type="submit" className="btn btn-success btn-lg btn-block" value="S'inscrire"/>
+                </div>
 
-            <button type="submit" class="btn btn-secondary" >S'inscrire</button>
-            </form>
-            <br/>
-       <div>{<label>vous possedez: {this.state.balanceDao} Bao</label>}
-       <span></span>
+              </div>
+              
+            </div>
+            </div>
+          </form>
+          </div>
+          <br/>
+          <div className="col-md-12">
+          <div className="p-3 p-lg-5 border" >{<label>vous possedez: {this.state.balanceDao} <span style={{color: "green"}}>BAO</span></label>}
+          <span></span>
+   
+          {<button className="btn btn-success btn-lg btn-block" onClick={ this.EnvoyerBao }>Envoyer Bao</button>}
+   <div className="col-md-12">
+       <br></br>
+   </div>
 
-       {<button class="btn btn-secondary" onClick={ this.EnvoyerBao }>EnvoyerBao</button>}
-
-       <ul>
-     { this.state.codes.map((code,index) =>(
-    <label>
-      <li key={index} data-index={index}>Code de réduction:{code.code},Montant:{code.montant}</li>
-      </label>
-                )
-    )}</ul>
-      <div></div>
-       </div>
-        </div>
+          <ul>
+        { this.state.codes.map((code,index) =>(
+       
+         <li key={index} data-index={index}>Code de réduction:{code.code},Montant:{code.montant}<br></br></li>
+         
+                   )
+       )}</ul>
+        
+    
+  </div>
+     </div>
+         </div>
+        
+      
+    </div>
+          
+     </div>
        );
+
     }
     changeUsername = event => {
         this.setState({username : event.target.value});

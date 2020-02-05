@@ -174,16 +174,31 @@ class Grossiste extends Component{
     render(){
         return(
 
-            <div className="subscribe-box">
+            <div>
 
-      Liste des pharmacies
-      <ul class="list-group">
-     { this.state.pharmas.map((pharma,index) =>(
-    <label>
-      <li class="list-group-item list-group-item-info" key={index} data-index={index} onClick={ this.showModal } value={pharma.nom}>{pharma.nom},{pharma.adresse}</li>
-      </label>
-                )
-    )}</ul>
+<div className="site-section">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <h2 className="h3 mb-5 text-black">Liste des pharmacies</h2>
+        </div>
+        <div className="col-md-12">
+  
+          
+            <ul class="list-group">
+                { this.state.pharmas.map((pharma,index) =>(
+               <label>
+                 <li class="list-group-item list-group-item-action active" key={index} data-index={index} onClick={ this.showModal } value={pharma.nom}>{pharma.nom},{pharma.adresse}</li>
+                 </label>
+                           )
+               )}</ul>
+         
+        
+      </div>
+    </div>
+  </div>
+
+      </div>
     <Modal
           isOpen={this.state.show}
           handleClose={this.hideModal}
@@ -206,12 +221,13 @@ class Grossiste extends Component{
           </form>
         </Modal>
 
-        {<button class="btn btn-secondary" onClick={ this.retrouverBao }>Récupérer les Bao</button>}
+        {<button class="btn btn-primary px-5 py-3" onClick={ this.retrouverBao }>Récupérer les Bao</button>}
         <br/>
         <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
-        {<button class="btn btn-secondary" onClick={ this.brulerBAO }>Bruler!!</button>}
+        {<button class="btn btn-primary px-5 py-3" onClick={ this.brulerBAO }>Bruler!!</button>}
 
       </div>
+
 
         );}
 }

@@ -13,18 +13,18 @@ constructor(props){
             contract : '',
             montant:0,
             event:'',
-            
-        
+
+
     };
     this.genererCodedeReduction = this.genererCodedeReduction.bind(this);
-        
+
     }
 
  async componentDidMount(){
-      
+
               await this.loadBlockchainData();
         }
-    
+
 
     async loadBlockchainData(){
         let contract = new Contract();
@@ -36,11 +36,21 @@ constructor(props){
 
            
         
+            this.setState({ contract :  contract })
+
+
         const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
-        this.setState({ montant :  montantRecupere }) 
+        this.setState({ montant :  montantRecupere })
         await this.state.contract.contractMarketPlace.methods.approve(this.state.contract.account,montantRecupere).send({from:this.state.contract.accounts3,gas: 470000,
             gasPrice:0,}).then(receipt=> {console.log(receipt)});
               
+
+
+
+
+
+
+
         }
     
       /*  var event = this.state.contract.contractMarketPlace.events.Transfer();
@@ -51,14 +61,14 @@ constructor(props){
             if (!error)
                 console.log(result);
         });
-        
+
     this.state.contract.contractMarketPlace.events.Transfer({
-   
+
    filter: { _to: "0xd95d04220342a277f1fddc277e18dc02bc32bdaa" } }
 )
     .on("data", function(event) {
                                  let data = event.returnValues
-  
+
                                    console.log(data.from, data.to);
                                 })*/
     }
@@ -66,18 +76,32 @@ constructor(props){
         await this.state.contract.contractMarketPlace.methods.GenerationCodeReduction(this.state.contract.accounts2,this.state.montant).send({from:this.state.contract.accounts3,gas: 470000,
             gasPrice:0,}).then(receipt=> {console.log(receipt)});
 
-    }   
-    
-    
+    }
+
+
     render(){
         return(
+            <div className="site-section">
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <h2 className="h3 mb-5 text-black">Liste des pharmacies</h2>
+        </div>
+        <div className="col-md-12">
+  
           
-            <div className="subscribe-box">
-                <div>{<label>vous avez recu: {this.state.montant} Bao</label>}</div>
-                {<button onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
-                <div id="txStatus"></div>
-            </div>
-                );}
-                
-    }       
+          
+            
+            <div>{<label>vous avez recu: {this.state.montant} Bao</label>}</div>
+            {<button class="btn btn-warning" onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
+            <div id="txStatus"></div>
+         
+        
+      </div>
+    </div>
+  </div>
+  </div>
+         );}
+
+    }
 export default MarketPlace;
