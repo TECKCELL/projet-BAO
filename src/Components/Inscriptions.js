@@ -87,7 +87,7 @@ class Inscription extends Component{
         this.contract1 = await new this.raft1Node.eth.Contract(HEALTH_ERC20_ABI, HEALTH_ERC20_ADDRESS)
         let montant = this.state.balanceDao;
         await this.state.contract.contractPharmacie.methods.transfer(this.state.contract.accounts3,montant).send({from:this.account,gas: 470000,
-            gasPrice:0}).then(receipt=> {alert(receipt)});
+            gasPrice:0}).then(receipt=> {alert(JSON.stringify(receipt,null,'\t'))});
 
     }
 
@@ -106,8 +106,8 @@ class Inscription extends Component{
             <div className="p-3 p-lg-5 border">
               <div className="form-group row">
                 <div className="col-md-6">
-                  <label for="usr" className="text-black">Veuillez entrer un nom d'utilisateur<span className="text-danger">*</span></label>
-                  <input id="usr" className="form-control" ref={(input) => { this.usr = input }} type="text" placeholder="Veuillez entrer votre nom d'utilisateur" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
+                  <label for="usr" className="text-black">Veuillez entrer le nom de votre pharmacie<span className="text-danger">*</span></label>
+                  <input id="usr" className="form-control" ref={(input) => { this.usr = input }} type="text" placeholder="Veuillez entrer le nom de votre pharmacie" onChange={this.changeUsername} minLength="3" autoComplete="off"        required="required"/>
                 </div>
                 <div className="col-md-6">
                   <label for="usr" className="text-black">Veuillez entrer une adresse <span className="text-danger">*</span></label>
@@ -136,10 +136,10 @@ class Inscription extends Component{
           </div>
           <br/>
           <div className="col-md-12">
-          <div className="p-3 p-lg-5 border" >{<label>vous possedez: {this.state.balanceDao} <span style={{color: "green"}}>BAO</span></label>}
+          <div className="p-3 p-lg-5 border" >{<label>vous possedez: {this.state.balanceDao} <span style={{color: "green"}}>BAO(s)</span></label>}
           <span></span>
    
-          {<button className="btn btn-success btn-lg btn-block" onClick={ this.EnvoyerBao }>Envoyer Bao</button>}
+          {<button className="btn btn-success btn-lg btn-block" onClick={ this.EnvoyerBao }>Envoyer BAO</button>}
    <div className="col-md-12">
        <br></br>
    </div>

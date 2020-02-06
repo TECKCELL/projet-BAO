@@ -1,4 +1,4 @@
-export const HEALTH_ERC20_ADDRESS = '0x51734774ef028ECeB63058C17B911154Cc1C4C9B'
+export const HEALTH_ERC20_ADDRESS = '0xedeEa26b5C7BF2C5cA16bb8b5dC43b9FC9979CCf'
 export const HEALTH_ERC20_ABI =[
 	{
 		"constant": true,
@@ -369,28 +369,10 @@ export const HEALTH_ERC20_ABI =[
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "token",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"name": "rate",
 				"type": "uint256"
-			},
-			{
-				"name": "token",
-				"type": "address"
 			}
 		],
 		"payable": false,

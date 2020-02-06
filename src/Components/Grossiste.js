@@ -86,7 +86,7 @@ class Grossiste extends Component{
       let r = this.raft1Node.utils.toWei(value.toString() ,'ether');
 
       await this.state.contract.contract.methods.EnregistrementFacture(idfacture,idPharma,montant).send({from:this.account,gas: 470000,
-          gasPrice:0}).then(receipt=> {console.log(receipt)});
+          gasPrice:0}).then(receipt=> {alert(JSON.stringify(receipt,null,'\t'))});
   }
     async retrouverBao(){
 
@@ -95,7 +95,7 @@ class Grossiste extends Component{
       const montantRecupere = await this.state.contract.contractMarketPlace.methods.balanceOf(this.state.contract.accounts3).call();
 
       await this.state.contract.contract.methods.transferFrom(account3,account1,montantRecupere).send({from:account1,gas: 470000,
-        gasPrice:0,}).then(receipt=> {console.log(receipt)});
+        gasPrice:0,}).then(receipt=> {alert(JSON.stringify(receipt,null,'\t'))});
 
 
 
@@ -105,7 +105,7 @@ class Grossiste extends Component{
       let burnMontant = parseInt(this.state.montantBAO)
 
       await this.state.contract.contract.methods.burn(burnMontant).send({from:this.state.contract.account,gas: 470000,
-        gasPrice:0,}).then(receipt=> {console.log(receipt)});
+        gasPrice:0,}).then(receipt=> {alert(JSON.stringify(receipt,null,'\t'))});
 
     }
 
@@ -221,9 +221,9 @@ class Grossiste extends Component{
           </form>
         </Modal>
 
-        {<button class="btn btn-primary px-5 py-3" onClick={ this.retrouverBao }>Récupérer les Bao</button>}
+        {<button class="btn btn-primary px-5 py-3" onClick={ this.retrouverBao }>Récupérer les BAOs</button>}
         <br/>
-        <div>{<label>vous avez récupérer: {this.state.montantBAO} Bao</label>}</div>
+        <div>{<label>vous avez récupéré: {this.state.montantBAO}<span style={{color: "blue"}}> BAO(s)</span></label>}</div>
         {<button class="btn btn-primary px-5 py-3" onClick={ this.brulerBAO }>Bruler!!</button>}
 
       </div>

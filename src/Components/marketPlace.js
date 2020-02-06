@@ -74,7 +74,7 @@ constructor(props){
     }
     async genererCodedeReduction(){
         await this.state.contract.contractMarketPlace.methods.GenerationCodeReduction(this.state.contract.accounts2,this.state.montant).send({from:this.state.contract.accounts3,gas: 470000,
-            gasPrice:0,}).then(receipt=> {console.log(receipt)});
+            gasPrice:0,}).then(receipt=>{alert(JSON.stringify(receipt,null,'\t'))} );
 
     }
 
@@ -85,15 +85,15 @@ constructor(props){
     <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <h2 className="h3 mb-5 text-black">Liste des pharmacies</h2>
+          <h2 className="h3 mb-5 text-black">Centrale d'achat</h2>
         </div>
         <div className="col-md-12">
   
           
           
             
-            <div>{<label>vous avez recu: {this.state.montant} Bao</label>}</div>
-            {<button class="btn btn-warning" onClick={ this.genererCodedeReduction }> <span>Generer code de réduction</span></button>}
+            <div>{<label>vous avez recu: {this.state.montant} <span style={{color:'orange'}}>BAO(s)</span></label>}</div>
+            {<button class="btn btn-warning" onClick={ this.genererCodedeReduction }> <span>Génération du code de réduction</span></button>}
             <div id="txStatus"></div>
          
         
